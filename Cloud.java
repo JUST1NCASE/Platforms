@@ -1,6 +1,6 @@
-public class Cloud{
-	/**Identifier number*/
-	private String number;
+public class Cloud{//fluffed by Justin Schaefer
+	/**Name of cloud*/
+	private String name;
 	/**X coordinate of the center*/
 	private double centerX;
 	/**Y coordinate of the flat bottom*/
@@ -14,8 +14,8 @@ public class Cloud{
 	/**Speed of the cloud*/
 	private int speed;
 	/**Creates a cloud labeled by number, with center (x,y) of either size 1, 2, or 3 from smallest to largest.*/
-	public Cloud(String number,double centerX,double bottomY,int size){
-		this.number=number;
+	public Cloud(String name,double centerX,double bottomY,int size){
+		this.name=name;
 		this.centerX=centerX;
 		this.bottomY=bottomY;
 		this.size=size;
@@ -37,8 +37,8 @@ public class Cloud{
 			speed=2;
 		}
 	}
-	public String getNumber(){
-		return number;
+	public String getName(){
+		return name;
 	}
 	public double getCenter(){
 		return centerX;
@@ -77,28 +77,9 @@ public class Cloud{
 		}
 	}
 	
-	public void move(){
-		StdDraw.setPenColor(StdDraw.BOOK_LIGHT_BLUE);
-		if(size==1){
-			filledHalfCircle(centerX-16,bottomY,10);
-			filledHalfCircle(centerX-3,bottomY,16);
-			filledHalfCircle(centerX+13,bottomY,9);
-			filledHalfCircle(centerX+22,bottomY-1,5);
-		}
-		if(size==2){
-			filledHalfCircle(centerX-32,bottomY,19);
-			filledHalfCircle(centerX-6,bottomY,31);
-			filledHalfCircle(centerX+26,bottomY,17);
-			filledHalfCircle(centerX+44,bottomY-1,8);
-		}
-		if(size==3){
-			filledHalfCircle(centerX-48,bottomY,28);
-			filledHalfCircle(centerX-9,bottomY,46);
-			filledHalfCircle(centerX+39,bottomY,25);
-			filledHalfCircle(centerX+66,bottomY-1,11);
-		}
+	public void move(double speed){
 		double diff=rightPoint-centerX;
-		centerX-=speed;
+		centerX-=this.speed+speed;
 		rightPoint=centerX+diff;
 	}
 	/**Draws a half circle, at specified center, of specified radius, from 0 to 180 degrees*/
@@ -140,9 +121,9 @@ public class Cloud{
 			one.draw();
 			two.draw();
 			three.draw();
-			one.move();
-			two.move();
-			three.move();
+			one.move(0);
+			two.move(0);
+			three.move(0);
 			one.draw();
 			two.draw();
 			three.draw();
